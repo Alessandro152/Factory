@@ -8,6 +8,7 @@ namespace Factory.Veiculo
     {
         private string _consumo;
         private string _potencia;
+        private string _modelo;
 
         public VolkswagenFactory(string consumo, string potencia)
         {
@@ -15,18 +16,14 @@ namespace Factory.Veiculo
             _potencia = potencia;
         }
 
-        public VolkswagenFactory()
+        public VolkswagenFactory(string modelo)
         {
-        }
-
-        public override Carro RetornarInformacoesCarro(string modelo)
-        {
-            return new Volkswagen(modelo);
+            _modelo = modelo;
         }
 
         public override Carro RetornarInformacoesCarro()
         {
-            return new Volkswagen(_consumo, _potencia);
+            return new Volkswagen(_modelo);
         }
     }
 }

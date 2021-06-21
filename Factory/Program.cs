@@ -1,6 +1,9 @@
 ﻿using Factory.Factory;
+using Factory.Produto.FiatVeiculos;
+using Factory.Produto.Veiculo;
 using Factory.Veiculo;
 using System;
+using System.Text;
 
 namespace Factory
 {
@@ -8,14 +11,44 @@ namespace Factory
     {
         static void Main(string[] args)
         {
-            ProdutoFactory produto = null;
+            //Marca do veiculo
+            Console.Write("Informe a marca do veículo: ");
+            string marca = Console.ReadLine();
 
-            produto = new VolkswagenFactory("12km/L", "60cv");
+            //Modelo do veiculo
+            Console.Write("Informe o modelo do veículo: ");
+            string modelo = Console.ReadLine();
 
-            var foda = produto.RetornarInformacoesCarro();
+            //Buscar os dados do veiculo
+            var dados = RetornarInformacoes(marca, modelo);
 
-            Console.WriteLine($" Informações do veiculo : {foda.Modelo} {foda.Consumo} {foda.Potencia}");
-            Console.ReadKey();
+            if (dados != null)
+            {
+                var texto = new StringBuilder($" Informações do veiculo : " +
+                                              $"Modelo: {dados.Modelo}, " +
+                                              $"Consumo: {dados.Consumo}, " +
+                                              $"Potência: {dados.Potencia}");
+                Console.WriteLine(texto);
+                Console.ReadKey();
+            }
+            
+        }
+
+        private static Carro RetornarInformacoes(string marca, string modelo)
+        {
+            ProdutoFactory veiculo = null;
+
+            switch (marca.ToLower())
+            {
+                case "volkswagen":
+                    veiculo = new VolkswagenFactory(modelo);
+                    break;
+                case "fiat":
+                    veiculo = new FiatFactory(modelo);
+                    break;
+            }
+
+            return veiculo.RetornarInformacoesCarro();
         }
     }
 }
