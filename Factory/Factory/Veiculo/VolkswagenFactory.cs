@@ -6,15 +6,7 @@ namespace Factory.Veiculo
 {
     public class VolkswagenFactory : ProdutoFactory 
     {
-        private string _consumo;
-        private string _potencia;
         private string _modelo;
-
-        public VolkswagenFactory(string consumo, string potencia)
-        {
-            _consumo = consumo;
-            _potencia = potencia;
-        }
 
         public VolkswagenFactory(string modelo)
         {
